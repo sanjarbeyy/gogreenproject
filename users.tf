@@ -218,10 +218,23 @@ resource "aws_secretsmanager_secret" "users" {
 }
 
 resource "aws_secretsmanager_secret_version" "users" {
-  for_each  = aws_iam_user.users
   secret_id = aws_secretsmanager_secret.users.id
   secret_string = jsonencode({
-    username = "${aws_iam_user.users[each.key].name}"
-    password = "${aws_iam_user_login_profile.password[each.key].password}"
+    username = "${aws_iam_user.users["sysadmin1"].name}"
+    password = "${aws_iam_user_login_profile.password["sysadmin1"].password}"
+    username = "${aws_iam_user.users["sysadmin2"].name}"
+    password = "${aws_iam_user_login_profile.password["sysadmin2"].password}"
+    username = "${aws_iam_user.users["dbadmin1"].name}"
+    password = "${aws_iam_user_login_profile.password["dbadmin1"].password}"
+    username = "${aws_iam_user.users["dbadmin2"].name}"
+    password = "${aws_iam_user_login_profile.password["dbadmin2"].password}"
+    username = "${aws_iam_user.users["monitor1"].name}"
+    password = "${aws_iam_user_login_profile.password["monitor1"].password}"
+    username = "${aws_iam_user.users["monitor2"].name}"
+    password = "${aws_iam_user_login_profile.password["monitor2"].password}"
+    username = "${aws_iam_user.users["monitor3"].name}"
+    password = "${aws_iam_user_login_profile.password["monitor3"].password}"
+    username = "${aws_iam_user.users["monitor4"].name}"
+    password = "${aws_iam_user_login_profile.password["monitor4"].password}"
   })
 }

@@ -44,27 +44,27 @@ module "web_security_group" {
           from_port   = 80
           to_port     = 80
           protocol    = "tcp"
-          cidr_blocks  = ["0.0.0.0/0"]
+          cidr_blocks = ["0.0.0.0/0"]
         },
         {
-          from_port  = 443
-          to_port    = 443
-          protocol   = "tcp"
+          from_port   = 443
+          to_port     = 443
+          protocol    = "tcp"
           cidr_blocks = ["0.0.0.0/0"]
         },
         {
           from_port       = 22
           to_port         = 22
           protocol        = "tcp"
-          cidr_blocks  = ["0.0.0.0/0"]
+          cidr_blocks     = ["0.0.0.0/0"]
           security_groups = [module.bastion_security_group.security_group_id["bastion_sg"]]
         }
       ]
       egress_rules = [
         {
-          from_port  = 0
-          to_port    = 0
-          protocol   = 0
+          from_port   = 0
+          to_port     = 0
+          protocol    = 0
           cidr_blocks = ["0.0.0.0/0"]
         }
       ]
@@ -86,14 +86,14 @@ module "app_security_group" {
           from_port       = 8080
           to_port         = 8080
           protocol        = "tcp"
-          cidr_blocks = ["0.0.0.0/0"]
+          cidr_blocks     = ["0.0.0.0/0"]
           security_groups = [module.web_security_group.security_group_id["web_sg"]]
         },
         {
           from_port       = 22
           to_port         = 22
           protocol        = "tcp"
-          cidr_blocks = ["0.0.0.0/0"]
+          cidr_blocks     = ["0.0.0.0/0"]
           security_groups = [module.bastion_security_group.security_group_id["bastion_sg"]]
         },
 
@@ -123,7 +123,7 @@ module "database_security_group" {
           from_port       = 3306
           to_port         = 3306
           protocol        = "tcp"
-          cidr_blocks = ["0.0.0.0/0"]
+          cidr_blocks     = ["0.0.0.0/0"]
           security_groups = [module.app_security_group.security_group_id["app_sg"]]
         },
       ]
@@ -194,7 +194,7 @@ module "alb_app_security_group" {
           from_port       = 80
           to_port         = 80
           protocol        = "tcp"
-          cidr_blocks = ["0.0.0.0/0"]
+          cidr_blocks     = ["0.0.0.0/0"]
           security_groups = [module.web_security_group.security_group_id["web_sg"]]
         }
       ],
